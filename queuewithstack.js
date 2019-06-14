@@ -31,28 +31,32 @@ class Stack {
   }
 }
 
-const stack1 = new Stack()
-const stack2 = new Stack()
-
-function enqueue(item) {
-  stack1.push(item)
-} 
-
-function dequeue() {
-  if(!stack2.top) {
-    if(!stack1.top) return 'There is nothing to dequeue!'
-    while(stack1.top) {
-      let p = stack1.pop()
-      stack2.push(p)
-    }
+class Queue {
+  constructor() {
+    this.stack1 = new Stack()
+    this.stack2 = new Stack()
   }
-  return stack2.pop()
+
+  enqueue(item) {
+    this.stack1.push(item)
+  } 
+
+  dequeue() {
+    if(!this.stack2.top) {
+      if(!this.stack1.top) return 'There is nothing to dequeue!'
+      while(this.stack1.top) {
+        let p = this.stack1.pop()
+        this.stack2.push(p)
+      }
+    }
+    return this.stack2.pop()
+  }
 }
 
-enqueue(2)
-enqueue(3)
-enqueue(4)
+const queue = new Queue()
 
-dequeue()
+queue.enqueue(2)
+queue.enqueue(3)
+queue.enqueue(4)
 
-console.log(JSON.stringify(stack1))
+console.log(queue.dequeue())
