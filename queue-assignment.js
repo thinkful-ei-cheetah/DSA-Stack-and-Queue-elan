@@ -9,6 +9,7 @@ class Queue {
   constructor() {
     this.first = null
     this.last = null
+    this.length = 0
   }
 
   enqueue(item) {
@@ -16,10 +17,11 @@ class Queue {
     if(!this.first) {
       this.first = newNode
     }
-    if(this.last) {
+    else if(this.last) {
       this.last.next = newNode
     }
     this.last = newNode
+    this.length++
   }
 
   dequeue() {
@@ -32,7 +34,8 @@ class Queue {
     if(node === this.last) {
       this.last = null;
     }
-    return node.value;
+    this.length--
+    return node.data;
   }
 }
 
@@ -82,3 +85,38 @@ peek(queue)
 display(queue)
 console.log(isEmpty(queue))
 console.log(JSON.stringify(queue))
+
+const fQueue = new Queue()
+const mQueue = new Queue()
+
+function pairDancers(dancers) {
+  dancers.forEach(dancer => {
+    if(dancer[0] === 'F') {
+      fQueue.enqueue(dancer)
+    }
+    else {
+      mQueue.enqueue(dancer)
+    }
+    if(fQueue.first && mQueue.first) {
+      let maleDancer = mQueue.dequeue()
+      let femDancer = fQueue.dequeue()
+      console.log(`${femDancer} is paired with ${maleDancer}`)
+    }
+  })
+  if(mQueue.length > 0) {
+    console.log(`There are ${mQueue.length} male dancers waiting to dance`)
+    } 
+    else if (fQueue.length > 0) {
+      console.log(`There are ${fQueue.length} female dancers waiting to dance`)
+    }
+}
+
+console.log(pairDancers([
+  'F Jane',
+  'M Frank',
+  'M John',
+  'M Sherlock',
+  'F Madonna',
+  'M David',
+  'F Beyonce'
+]))
