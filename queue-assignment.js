@@ -76,15 +76,15 @@ function display(queue) {
   }
 }
 
-const queue = new Queue()
-queue.enqueue(3)
-queue.enqueue(4)
+// const queue = new Queue()
+// queue.enqueue(3)
+// queue.enqueue(4)
 // queue.dequeue()
 // queue.dequeue()
-peek(queue)
-display(queue)
-console.log(isEmpty(queue))
-console.log(JSON.stringify(queue))
+// peek(queue)
+// display(queue)
+// console.log(isEmpty(queue))
+// console.log(JSON.stringify(queue))
 
 const fQueue = new Queue()
 const mQueue = new Queue()
@@ -111,12 +111,38 @@ function pairDancers(dancers) {
     }
 }
 
-console.log(pairDancers([
-  'F Jane',
-  'M Frank',
-  'M John',
-  'M Sherlock',
-  'F Madonna',
-  'M David',
-  'F Beyonce'
-]))
+// console.log(pairDancers([
+//   'F Jane',
+//   'M Frank',
+//   'M John',
+//   'M Sherlock',
+//   'F Madonna',
+//   'M David',
+//   'F Beyonce'
+// ]))
+
+//10. Ophidian Bank
+
+
+const bankQueue = new Queue()
+bankQueue.enqueue('Elan')
+bankQueue.enqueue('Makua')
+bankQueue.enqueue('Teddy')
+bankQueue.enqueue('Fred')
+
+function ophidianBank(queue) {
+  while(queue.length > 0) {
+    if(Math.random() <= .25) {
+      let firstPerson = queue.first
+      queue.dequeue()
+      queue.enqueue(firstPerson.data)
+      console.log(`${firstPerson.data} has been moved to the end of the queue.`)
+    }
+    else {
+      console.log(`${queue.first.data} has been served.`)
+      queue.dequeue()
+    }
+  }
+}
+
+ophidianBank(bankQueue)
